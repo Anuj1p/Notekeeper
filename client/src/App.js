@@ -1,20 +1,30 @@
-import './App.css';
-import LandingPage from './screens/LandingPage/LandingPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginScreen from './screens/LoginScreen/LoginScreen';
-import SignupScreen from './screens/SignupScreen/SignupScreen';
-import MyNotes from './screens/MyNotes/MyNotes';
+import { StoreProvider } from 'easy-peasy';
+import './App.css';
+import EditNote from './Components/EditNote';
+import LandingPage from './Components/LandingPage';
+import LoginScreen from './Components/LoginScreen';
+import MyNotes from './Components/MyNotes';
+import NewNote from './Components/NewNote';
+import SignupScreen from './Components/SignupScreen';
+import store from './Store/configureStore';
+import Header from './Components/Header';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<LandingPage />} exact />
-        <Route path='/login' element={<LoginScreen />} />
-        <Route path='/register' element={<SignupScreen />} />
-        <Route path='/notes' element={<MyNotes />} />
-      </Routes>
-    </BrowserRouter>
+    <StoreProvider store={store}>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path='/' element={<LandingPage />} exact />
+          <Route path='/login' element={<LoginScreen />} />
+          <Route path='/register' element={<SignupScreen />} />
+          <Route path='/notes' element={<MyNotes />} />
+          <Route path='/newNote' element={<NewNote />} />
+          <Route path='/editNote/:id' element={<EditNote />} />
+        </Routes>
+      </BrowserRouter>
+    </StoreProvider>
   );
 }
 

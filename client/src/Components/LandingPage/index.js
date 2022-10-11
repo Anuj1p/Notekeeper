@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { Button } from '@mui/material';
-import './LandingPage.css';
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useStoreState } from 'easy-peasy';
 
 const LandingPage = () => {
     const history = useNavigate();
+    const userInfo = useStoreState(state => state.userInfo);
 
     useEffect(() => {
-        const userInfo = JSON.parse(localStorage.getItem("userInformation"));
-
+        // const userInfo = JSON.parse(localStorage.getItem("userInformation"));
+        console.log(userInfo);
         if (userInfo) {
             history("/notes");
         }
@@ -28,8 +28,8 @@ const LandingPage = () => {
                 <div>One Safe place for all your notes.</div>
             </div>
             <div>
-                <Button variant="contained" onClick={loginHandler}>LOGIN</Button>
-                <Button variant="outlined" onClick={signupHandler}>SIGNUP</Button>
+                <button variant="contained" onClick={loginHandler}>LOGIN</button>
+                <button variant="outlined" onClick={signupHandler}>SIGNUP</button>
             </div>
         </div>
     )
